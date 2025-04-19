@@ -1,59 +1,39 @@
-<!-- File: app/src/main/res/layout/item_event.xml -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/event_container"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <!-- Background image -->
+    <!-- Event Poster -->
     <ImageView
-        android:id="@+id/eventImage"
+        android:id="@+id/ivEventPoster"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:scaleType="centerCrop" />
 
-    <!-- Semi‑transparent overlay for readability -->
-    <View
+    <!-- Event Name -->
+    <TextView
+        android:id="@+id/tvName"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="#80000000" />
+        android:layout_height="wrap_content" />
 
-    <!-- Text + Button -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="12dp"
+    <!-- Event Date -->
+    <TextView
+        android:id="@+id/tvEventDate"
+        android:textSize="14sp"
+        android:textColor="#666"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/eventTitle"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/eventDate"
-            android:textColor="#DDDDDD"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/eventDescription"
-            android:textColor="#CCCCCC"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btnTakeAttendance"
-            android:layout_marginTop="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Take Attendance"/>
-    </LinearLayout>
-</FrameLayout>
+    <!-- Event Description -->
+    <TextView
+        android:id="@+id/tvEventDescription"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

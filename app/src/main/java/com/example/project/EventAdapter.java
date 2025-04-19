@@ -1,97 +1,66 @@
-// File: app/src/main/java/com/example/project/ui/home/EventAdapter.java
-package com.example.project.ui.home;
+package com.example.project.ui.dashboard;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private List<Event> eventList;
-    private final SimpleDateFormat parser =
-            new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
 
+    // Constructor
     public EventAdapter(List<Event> eventList) {
         this.eventList = eventList;
     }
 
-    public void updateEvents(List<Event> events) {
-        this.eventList = events;
-        notifyDataSetChanged();
-    }
+    @Override
+    public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Inflate the event item layout
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.event_item, parent, false);
 
-    @NonNull @Override
-    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_event, parent, false);
-        return new EventViewHolder(v);
+        return new EventViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventViewHolder holder, int pos) {
-        Event e = eventList.get(pos);
+    public void onBindViewHolder(EventViewHolder holder, int position) {
+        Event event = eventList.get(position);
 
-        holder.title.setText(e.getTitle());
-        holder.date.setText(e.getDate());
-        holder.description.setText(e.getDescription());
-        holder.eventImage.setImageResource(e.getImageResId());
+        // Bind the event data to the views
+        holder.tvEventName.setText(event.getEventName());
+        holder.tvEventDate.setText(event.getEventDate());
+        holder.tvEventDescription.setText(event.getEventDescription());
 
-        // Enable button only if event date == today
-        boolean isToday = false;
-        try {
-            Date d = parser.parse(e.getDate());
-            Calendar c1 = Calendar.getInstance(), c2 = Calendar.getInstance();
-            c1.setTime(d);
-            isToday = c1.get(Calendar.YEAR)  == c2.get(Calendar.YEAR)
-                    && c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH)
-                    && c1.get(Calendar.DAY_OF_MONTH)
-                    == c2.get(Calendar.DAY_OF_MONTH);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-        holder.takeAttendance.setEnabled(isToday);
-        holder.takeAttendance.setOnClickListener(view -> {
-            if (!holder.takeAttendance.isEnabled()) return;
-            Toast.makeText(view.getContext(),
-                    "Taking attendance for “" + e.getTitle() + "”",
-                    Toast.LENGTH_SHORT).show();
-            // TODO: actual attendance logic
-        });
+        // For the event poster, you could load an image from a URL or resource.
+        // Example: If using Glide or Picasso to load an image
+        // Glide.with(holder.ivEventPoster.getContext()).load(event.getEventPosterUrl()).into(holder.ivEventPoster);
+        holder.ivEventPoster.setImageResource(event.getEventPosterResource());
     }
 
     @Override
     public int getItemCount() {
-        return eventList != null ? eventList.size() : 0;
+        return eventList.size();
     }
 
-    static class EventViewHolder extends RecyclerView.ViewHolder {
-        final TextView title, date, description;
-        final Button    takeAttendance;
-        final ImageView eventImage;
+    // ViewHolder class to hold the item views
+    public class EventViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvEventName, tvEventDate, tvEventDescription;
+        public ImageView ivEventPoster;
 
-        EventViewHolder(@NonNull View v) {
-            super(v);
-            title           = v.findViewById(R.id.eventTitle);
-            date            = v.findViewById(R.id.eventDate);
-            description     = v.findViewById(R.id.eventDescription);
-            takeAttendance  = v.findViewById(R.id.btnTakeAttendance);
-            eventImage      = v.findViewById(R.id.eventImage);
+        public EventViewHolder(View itemView) {
+            super(itemView);
+            tvEventName = itemView.findViewById(R.id.tvName);
+            tvEventDate = itemView.findViewById(R.id.tvEventDate);
+            tvEventDescription = itemView.findViewById(R.id.tvEventDescription);
+            ivEventPoster = itemView.findViewById(R.id.ivEventPoster);
         }
     }
 }
