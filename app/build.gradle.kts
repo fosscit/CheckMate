@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.project"
+    namespace = "com.example.project" // Your app's namespace
     compileSdk = 35
 
     defaultConfig {
@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-
+    // If using version catalog, the libs variable should be defined in libs.versions.toml
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

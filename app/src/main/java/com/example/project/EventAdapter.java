@@ -1,9 +1,11 @@
+// File: app/src/main/java/com/example/project/ui/home/EventAdapter.java
 package com.example.project.ui.home;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +31,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         this.eventList = eventList;
     }
 
-    /** Called by HomeFragment to swap in a new list */
     public void updateEvents(List<Event> events) {
         this.eventList = events;
         notifyDataSetChanged();
     }
 
-    @NonNull
-    @Override
+    @NonNull @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_event, parent, false);
@@ -46,14 +46,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int pos) {
         Event e = eventList.get(pos);
+
         holder.title.setText(e.getTitle());
         holder.date.setText(e.getDate());
         holder.description.setText(e.getDescription());
+        holder.eventImage.setImageResource(e.getImageResId());
 
-        // Compare year/month/day only
+        // Enable button only if event date == today
         boolean isToday = false;
         try {
-            Date d    = parser.parse(e.getDate());
+            Date d = parser.parse(e.getDate());
             Calendar c1 = Calendar.getInstance(), c2 = Calendar.getInstance();
             c1.setTime(d);
             isToday = c1.get(Calendar.YEAR)  == c2.get(Calendar.YEAR)
@@ -63,16 +65,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-
         holder.takeAttendance.setEnabled(isToday);
         holder.takeAttendance.setOnClickListener(view -> {
             if (!holder.takeAttendance.isEnabled()) return;
-            Toast.makeText(
-                    view.getContext(),
+            Toast.makeText(view.getContext(),
                     "Taking attendance for “" + e.getTitle() + "”",
-                    Toast.LENGTH_SHORT
-            ).show();
-            // TODO: launch your actual attendance logic here
+                    Toast.LENGTH_SHORT).show();
+            // TODO: actual attendance logic
         });
     }
 
@@ -83,7 +82,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     static class EventViewHolder extends RecyclerView.ViewHolder {
         final TextView title, date, description;
-        final Button takeAttendance;
+        final Button    takeAttendance;
+        final ImageView eventImage;
 
         EventViewHolder(@NonNull View v) {
             super(v);
@@ -91,6 +91,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             date            = v.findViewById(R.id.eventDate);
             description     = v.findViewById(R.id.eventDescription);
             takeAttendance  = v.findViewById(R.id.btnTakeAttendance);
+            eventImage      = v.findViewById(R.id.eventImage);
         }
     }
 }
