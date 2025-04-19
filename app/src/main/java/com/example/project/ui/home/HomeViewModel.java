@@ -4,16 +4,25 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+import java.util.ArrayList;
+import java.util.List;
 
-    private final MutableLiveData<String> mText;
+public class HomeViewModel extends ViewModel {
+    private final MutableLiveData<List<Event>> events = new MutableLiveData<>();
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        loadEvents();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Event>> getEvents() {
+        return events;
+    }
+
+    private void loadEvents() {
+        List<Event> list = new ArrayList<>();
+        list.add(new Event("Figma Unleashed",    "April 19, 2025", "A UI/UX workshop by FOSS‑CIT"));
+        list.add(new Event("Intern 101: SMARTAIL","March 1, 2025",      "AI internship insights"));
+        // …add more as needed…
+        events.setValue(list);
     }
 }
