@@ -5,17 +5,51 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/eventTextView"
+    <!-- Event Name EditText -->
+    <EditText
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No events yet"
-        android:textSize="18sp"
-        android:textColor="#000000" />
+        android:hint="Enter Event Name"
+        android:inputType="text" />
 
-    <Button
-        android:id="@+id/createEventButton"
+    <!-- Event Date EditText -->
+    <EditText
+        android:id="@+id/etDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Event" />
+        android:hint="Enter Event Date"
+        android:inputType="text" />
+
+    <!-- Event Description EditText -->
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Event Description"
+        android:inputType="text" />
+
+    <!-- Event Poster Preview ImageView -->
+    <ImageView
+        android:id="@+id/ivPosterPreview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_launcher_background"
+        android:scaleType="centerCrop"
+        android:contentDescription="Event Poster Preview"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Event" />
+
+    <!-- Upload Button -->
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Poster" />
+
 </LinearLayout>

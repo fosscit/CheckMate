@@ -1,9 +1,9 @@
-package com.example.project.ui.home;
+package com.example.project;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.example.project.model.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,44 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.project">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Project"
-        tools:targetApi="31">
+        android:theme="@style/Theme.Project">
 
-        <!-- Login Activity (set this as the LAUNCHER) -->
+        <!-- Login Activity (Launcher) -->
         <activity
             android:name=".ui.LoginActivity"
             android:exported="true"
-            android:label="Login">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- CreateEventActivity -->
-        <activity android:name=".ui.home.CreateEventActivity"
-            android:label="Create Event"
-            android:parentActivityName=".ui.dashboard.DashboardFragment" />
-
-
-        <!-- Main Dashboard Activity -->
+        <!-- Main Activity (Hosts Fragments) -->
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="Dashboard" />
+            android:label="@string/app_name"
+            android:exported="false" />
 
-        <!-- Optional: HomeActivity if needed -->
-        <activity android:name=".HomeActivity" />
+        <!-- Removed HomeActivity declaration if it existed -->
+
     </application>
 
 </manifest>

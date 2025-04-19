@@ -1,66 +1,67 @@
-package com.example.project.ui.dashboard;
+package com.example.project;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.project.R;
-
+import com.squareup.picasso.Picasso;
+import java.io.File;
 import java.util.List;
+import androidx.annotation.NonNull;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private List<Event> eventList;
 
-    // Constructor
     public EventAdapter(List<Event> eventList) {
         this.eventList = eventList;
     }
 
-    @Override
-    public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Inflate the event item layout
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.event_item, parent, false);
+    public void updateList(List<Event> newList) {
+        this.eventList = newList;
+        notifyDataSetChanged();
+    }
 
+    @NonNull
+    @Override
+    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_event, parent, false);
         return new EventViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(EventViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = eventList.get(position);
+        holder.tvName.setText(event.getEventName());
+        holder.tvDate.setText(event.getEventDate());
+        holder.tvDesc.setText(event.getEventDescription());
 
-        // Bind the event data to the views
-        holder.tvEventName.setText(event.getEventName());
-        holder.tvEventDate.setText(event.getEventDate());
-        holder.tvEventDescription.setText(event.getEventDescription());
-
-        // For the event poster, you could load an image from a URL or resource.
-        // Example: If using Glide or Picasso to load an image
-        // Glide.with(holder.ivEventPoster.getContext()).load(event.getEventPosterUrl()).into(holder.ivEventPoster);
-        holder.ivEventPoster.setImageResource(event.getEventPosterResource());
+        // Load image from file path
+        if (!event.getPosterPath().isEmpty()) {
+            Picasso.get()
+                    .load(new File(event.getPosterPath()))
+                    .placeholder(R.drawable.bg_docker)
+                    .error(R.drawable.bg_hackathon)
+                    .into(holder.ivPoster);
+        }
     }
 
     @Override
-    public int getItemCount() {
-        return eventList.size();
-    }
+    public int getItemCount() { return eventList != null ? eventList.size() : 0; }
 
-    // ViewHolder class to hold the item views
-    public class EventViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvEventName, tvEventDate, tvEventDescription;
-        public ImageView ivEventPoster;
+    static class EventViewHolder extends RecyclerView.ViewHolder {
+        TextView tvName, tvDate, tvDesc;
+        ImageView ivPoster;
 
-        public EventViewHolder(View itemView) {
+        EventViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvEventName = itemView.findViewById(R.id.tvName);
-            tvEventDate = itemView.findViewById(R.id.tvEventDate);
-            tvEventDescription = itemView.findViewById(R.id.tvEventDescription);
-            ivEventPoster = itemView.findViewById(R.id.ivEventPoster);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvDesc = itemView.findViewById(R.id.tvDesc);
+            ivPoster = itemView.findViewById(R.id.ivPoster);
         }
     }
 }

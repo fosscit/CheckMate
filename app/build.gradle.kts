@@ -42,6 +42,8 @@ android {
             implementation(libs.constraintlayout)
             implementation(libs.lifecycle.livedata.ktx)
             implementation ("com.google.android.material:material:1.11.0")
+            implementation ("com.squareup.picasso:picasso:2.71828")
+            implementation ("androidx.annotation:annotation:1.7.1")
             implementation(libs.lifecycle.viewmodel.ktx)
             implementation(libs.navigation.fragment)
             implementation(libs.navigation.ui)
