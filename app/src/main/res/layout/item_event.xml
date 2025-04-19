@@ -17,8 +17,7 @@
             android:id="@+id/ivPoster"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_docker"/>
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tvName"

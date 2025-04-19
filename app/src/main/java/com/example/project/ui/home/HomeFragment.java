@@ -1,10 +1,16 @@
 package com.example.project.ui.home;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,12 +33,35 @@ public class HomeFragment extends Fragment {
         RecyclerView rv = root.findViewById(R.id.recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);  // Request code
+        }
+
+
         File csv = new File(requireContext().getExternalFilesDir(null), "events.csv");
         List<Event> events = loadEventsFromCsv(csv);
         adapter = new EventAdapter(events);
         rv.setAdapter(adapter);
 
         return root;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, proceed to load the event data
+                File csv = new File(requireContext().getExternalFilesDir(null), "events.csv");
+                adapter.updateList(loadEventsFromCsv(csv));
+            } else {
+                // Permission denied, handle accordingly
+                Toast.makeText(getContext(), "Permission denied! Unable to load images.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
