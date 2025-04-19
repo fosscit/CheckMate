@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -46,4 +45,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // ZXing for barcode scanning
+    implementation(libs.zxing) // <-- This is the new dependency
 }
