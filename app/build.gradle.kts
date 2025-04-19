@@ -38,6 +38,8 @@ dependencies {
     // If using version catalog, the libs variable should be defined in libs.versions.toml
     implementation(libs.appcompat)
     implementation(libs.material)
+    // ZXing for barcode scanning
+    implementation(libs.zxing) // <-- This is the new dependency
     implementation(libs.constraintlayout)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
