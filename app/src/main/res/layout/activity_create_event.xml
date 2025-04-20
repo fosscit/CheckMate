@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/eventNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Event Name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/eventDateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Event Date"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/createEventButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Event" />
+</LinearLayout>
