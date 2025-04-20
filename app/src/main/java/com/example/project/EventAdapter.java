@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,7 +71,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         } else {
             holder.ivPoster.setImageResource(R.drawable.bg_docker); // Optional fallback image
         }
+
+        // Enable or disable the "Take Attendance" button based on whether it's today's date
+        if (event.isToday()) {
+            holder.takeAttendanceButton.setEnabled(true); // Enable if event date matches current date
+        } else {
+            holder.takeAttendanceButton.setEnabled(false); // Disable otherwise
+        }
     }
+
 
     @Override
     public int getItemCount() {
@@ -80,6 +89,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     static class EventViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvDate, tvDesc;
         ImageView ivPoster;
+        Button takeAttendanceButton;
 
         EventViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,6 +97,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvDate = itemView.findViewById(R.id.tvDate);
             tvDesc = itemView.findViewById(R.id.tvDesc);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            takeAttendanceButton = itemView.findViewById(R.id.takeAttendanceButton); // Reference the button here
         }
     }
 }

@@ -1,5 +1,8 @@
 package com.example.project;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event {
     private final String eventName;
     private final String eventDate;
@@ -17,4 +20,11 @@ public class Event {
     public String getEventDate() { return eventDate; }
     public String getEventDescription() { return eventDescription; }
     public String getPosterPath() { return posterPath; }
+
+    // Method to check if the event date is today
+    public boolean isToday() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date()); // Get current date in "yyyy-MM-dd" format
+        return eventDate.equals(currentDate); // Return true if the event date is today
+    }
 }
