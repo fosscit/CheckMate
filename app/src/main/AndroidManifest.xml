@@ -30,6 +30,9 @@
             android:label="@string/app_name"
             android:exported="false" />
 
+        <activity android:name=".ui.notifications.ScannerActivity" />
+
+
         <!-- Removed HomeActivity declaration if it existed -->
 
     </application>

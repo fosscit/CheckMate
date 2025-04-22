@@ -80,7 +80,9 @@ public class DashboardFragment extends Fragment {
             Log.d("EventDebug", "Saved poster path: " + currentPhotoPath);
 
             if (currentPhotoPath != null) {
-                String savedPath = copyImageToInternalStorage(requireContext(), Uri.fromFile(new File(currentPhotoPath)), "event_poster.jpg");
+                String safeName = name.replaceAll("[^a-zA-Z0-9-_]", "_");
+                String imageName = safeName + ".jpg";
+                String savedPath = copyImageToInternalStorage(requireContext(), Uri.fromFile(new File(currentPhotoPath)), imageName);
                 Event event = new Event(name, date, desc, savedPath != null ? savedPath : "");
                 File csv = new File(requireContext().getExternalFilesDir(null), "events.csv");
                 appendEventToCsv(event, csv);

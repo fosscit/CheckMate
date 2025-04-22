@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project.ui.notifications.ScannerActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -78,6 +79,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         } else {
             holder.takeAttendanceButton.setEnabled(false); // Disable otherwise
         }
+        holder.takeAttendanceButton.setOnClickListener(v -> {
+            if (holder.takeAttendanceButton.isEnabled()) {
+                android.content.Context context = v.getContext();
+                android.content.Intent intent = new android.content.Intent(context, ScannerActivity.class);
+                intent.putExtra("event_name", event.getEventName());
+                context.startActivity(intent);
+            }
+        });
     }
 
 
