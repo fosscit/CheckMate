@@ -13,8 +13,8 @@
 
     <item
         android:id="@+id/navigation_scanner"
-        android:icon="@drawable/ic_scanner"
-        android:title="@string/scanner" />
+        android:icon="@drawable/checking_attendance"
+        android:title="@string/Attendance" />
 
 
 </menu>
