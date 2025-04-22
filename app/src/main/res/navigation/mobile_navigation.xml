@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_scanner"
-        android:name="com.example.project.ui.notifications.ScannerFragment"
+        android:name="com.example.project.ui.notifications.AttendanceFragment"
         android:label="@string/title_scanner"
         tools:layout="@layout/fragment_scanner" />
 </navigation>
