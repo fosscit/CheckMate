@@ -24,9 +24,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.project.Event;
+import com.example.project.MainActivity;
 import com.example.project.R;
+import com.example.project.ui.LoginActivity;
+import com.example.project.ui.home.HomeFragment;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedWriter;
@@ -77,8 +82,6 @@ public class DashboardFragment extends Fragment {
                 return;
             }
 
-            Log.d("EventDebug", "Saved poster path: " + currentPhotoPath);
-
             if (currentPhotoPath != null) {
                 String safeName = name.replaceAll("[^a-zA-Z0-9-_]", "_");
                 String imageName = safeName + ".jpg";
@@ -88,11 +91,15 @@ public class DashboardFragment extends Fragment {
                 appendEventToCsv(event, csv);
                 Toast.makeText(getContext(), "Event saved!", Toast.LENGTH_SHORT).show();
                 clearForm();
+
+                // Move to HomeFragment
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_home);
+
             } else {
                 Toast.makeText(getContext(), "Please select an image", Toast.LENGTH_SHORT).show();
             }
         });
-
         return root;
     }
 
