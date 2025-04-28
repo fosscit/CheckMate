@@ -8,4 +8,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Attendance">Attendance</string>
+    <string name="Scan_Students">Scan Students</string>
+    <string name="Scan_Barcode">Scan Barcode</string>
+    <string name="Scanned_Roll_Numbers">"Scanned Roll Numbers: "</string>
 </resources>
