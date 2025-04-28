@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import com.example.project.R;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ScannerActivity extends AppCompatActivity {
 
@@ -82,8 +84,13 @@ public class ScannerActivity extends AppCompatActivity {
     private void saveRollToCsv(String rollNumber) {
         File file = new File(getFilesDir(), eventName + "_attendance.csv");
 
+        // Get current date and time
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(rollNumber);
+            // Write rollNumber, date, and time
+            writer.write(rollNumber + "," + currentDate + "," + currentTime);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
