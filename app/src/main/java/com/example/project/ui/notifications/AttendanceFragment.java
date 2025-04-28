@@ -68,7 +68,20 @@ public class AttendanceFragment extends Fragment {
 
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                builder.append("• ").append(scanner.nextLine()).append("\n");
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine().trim();
+                    if (!line.isEmpty()) {
+                        String[] parts = line.split(",");
+                        if (parts.length >= 3) {
+                            String roll = parts[0];
+                            String date = parts[1];
+                            String time = parts[2];
+                            builder.append("• ").append(roll).append(" - ").append(date).append(" at ").append(time).append("\n");
+                        } else {
+                            builder.append("• ").append(line).append("\n"); // fallback if something is wrong
+                        }
+                    }
+                }
             }
 
             // Show in AlertDialog
