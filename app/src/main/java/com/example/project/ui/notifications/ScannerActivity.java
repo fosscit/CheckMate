@@ -105,8 +105,14 @@ public class ScannerActivity extends AppCompatActivity {
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
-                    if (!line.isEmpty() && !scannedRollNumbers.contains(line)) {
-                        scannedRollNumbers.add(line);
+                    if (!line.isEmpty()) {
+                        String[] parts = line.split(",");
+                        if (parts.length > 0) {
+                            String roll = parts[0].trim();
+                            if (!scannedRollNumbers.contains(roll)) {
+                                scannedRollNumbers.add(roll);
+                            }
+                        }
                     }
                 }
             } catch (IOException e) {

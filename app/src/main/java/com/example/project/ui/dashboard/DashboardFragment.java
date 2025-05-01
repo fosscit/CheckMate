@@ -144,17 +144,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void showImagePickerOptions() {
-        String[] options = {"Take Photo", "Choose from Gallery"};
-        new android.app.AlertDialog.Builder(requireContext())
-                .setTitle("Select Poster")
-                .setItems(options, (dialog, which) -> {
-                    if (which == 0) {
-                        dispatchTakePictureIntent();
-                    } else {
-                        pickImageFromGallery();
-                    }
-                })
-                .show();
+        pickImageFromGallery();
     }
 
     private void pickImageFromGallery() {
