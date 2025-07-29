@@ -1,9 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="?attr/colorSurface">
 
     <!-- Event poster -->
     <ImageView
@@ -11,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:contentDescription="Event Poster"
+        android:contentDescription="@string/event_poster"
         android:src="@drawable/bg_docker" />
 
     <!-- Event name -->
@@ -19,9 +21,10 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event Name"
+        android:text="@string/event_name"
         android:textStyle="bold"
         android:textSize="18sp"
+        android:textColor="?attr/colorOnSurface"
         android:layout_marginTop="8dp" />
 
     <!-- Event date -->
@@ -29,16 +32,18 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event Date"
-        android:textSize="14sp" />
+        android:text="@string/event_date"
+        android:textSize="14sp"
+        android:textColor="?attr/colorOnSurface" />
 
     <!-- Event description -->
     <TextView
         android:id="@+id/tvDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event Description"
+        android:text="@string/event_description"
         android:textSize="14sp"
+        android:textColor="?attr/colorOnSurface"
         android:layout_marginBottom="8dp" />
 
     <!-- Buttons: View Attendance + Move to Downloads -->
@@ -47,18 +52,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/viewAttendanceButton"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View Attendance" />
+            android:text="@string/view_attendance"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
+            android:layout_marginEnd="8dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/moveToDownloadsButton"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Move to Downloads"
-            android:layout_marginStart="8dp" />
+            android:text="@string/move_to_downloads"
+            android:backgroundTint="?attr/colorPrimaryVariant"
+            android:textColor="?attr/colorOnPrimary" />
     </LinearLayout>
 
     <!-- Attendance list -->
@@ -68,5 +79,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone"
-        android:paddingTop="8dp" />
+        android:paddingTop="8dp"
+        android:background="@android:color/white" />
 </LinearLayout>

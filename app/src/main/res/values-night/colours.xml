@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!-- Background & text -->
-    <color name="background">#FFFFFF</color>
-    <color name="onBackground">#000000</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="onSurface">#000000</color>
+    <color name="background">#121212</color>
+    <color name="onBackground">#FFFFFF</color>
+    <color name="surface">#121212</color>
+    <color name="onSurface">#FFFFFF</color>
 </resources>
